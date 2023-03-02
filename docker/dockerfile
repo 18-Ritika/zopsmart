@@ -1,0 +1,12 @@
+FROM ubuntu:22.04
+
+RUN apt-get update
+RUN apt-get install -y wget
+
+RUN wget https://go.dev/dl/go1.20.linux-amd64.tar.gz
+
+RUN rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.linux-amd64.tar.gz
+
+COPY 01-helloworld.go 01-helloworld.go
+
+ENTRYPOINT ["/usr/local/go/bin/go", "run", "01-helloworld.go"]
